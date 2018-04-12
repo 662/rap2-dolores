@@ -4,4 +4,4 @@ module.exports = {
   session: {
     key: 'koa:sess'
   }
-};
+}

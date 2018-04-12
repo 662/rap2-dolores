@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { PropTypes, Link, replace,push, StoreStateRouterLocationURI } from '../../family'
+import { PropTypes, Link, replace, push, StoreStateRouterLocationURI } from '../../family'
 import { DialogController } from '../utils'
 import { serve } from '../../relatives/services/constant'
 import InterfaceForm from './InterfaceForm'
@@ -46,12 +46,12 @@ class InterfaceSummary extends Component {
             <li><span className='label'>简介：</span>{itf.description}</li>
           }
           <li>
-              <button type='button' className={`btn btn-secondary btn-success`} onClick={e=>{
-                var query=prompt("目标","问号后头的内容")
-                if(query){
-                    this.context.store.dispatch(push(`editor?${query}`,itf))
-                }
-              }}>
+            <button type='button' className={`btn btn-secondary btn-success`} onClick={e => {
+              var query = prompt('目标', '问号后头的内容')
+              if (query) {
+                this.context.store.dispatch(push(`editor?${query}`, itf))
+              }
+            }}>
                 点击复制我
               </button></li>
         </ul>
