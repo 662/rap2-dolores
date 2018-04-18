@@ -53,14 +53,16 @@ class InterfaceEditor extends Component {
       editable: !!(itf.locker && itf.locker.id === auth.id)
     }
   }
-  componentDidMount () {}
+  componentDidMount () {
+    // if (this.props.editable) this.handleLockInterface();
+  }
   componentWillReceiveProps (nextProps) {
     if (nextProps.itf.id === this.state.itf.id && nextProps.itf.updatedAt === this.state.itf.updatedAt) return
     this.setState(InterfaceEditor.mapPropsToState(nextProps))
   }
   componentDidUpdate (prevProps) {
     if (prevProps.editable !== this.props.editable && this.props.editable) {
-      this.handleLockInterface()
+    //   this.handleLockInterface();
     }
   }
   // Use shouldComponentUpdate() to let React know if a component's output is not affected by the current change in state or props.
@@ -72,9 +74,6 @@ class InterfaceEditor extends Component {
     // { itf: {}, properties: [] }
   }
   render () {
-    console.log('ddddddddddddddddddddddddddddd')
-    console.log(this.state)
-    console.log('ddddddddddddddddddddddddddddd')
     let { auth, repository, mod, itf } = this.props
     let { id, locker } = this.state.itf
     if (!id) return null

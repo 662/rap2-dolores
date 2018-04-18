@@ -61,7 +61,12 @@ class RepositoryEditor extends Component {
     }
   }
   render () {
-    let { location: { params }, auth, repository, history } = this.props
+    let {
+      location: { params },
+      auth,
+      repository,
+      history
+    } = this.props
     if (!repository.fetching && !repository.data) return <div className='p100 fontsize-40 text-center'>404</div>
 
     repository = repository.data
@@ -82,14 +87,14 @@ class RepositoryEditor extends Component {
         p.moduleId = itf.moduleId
         p.creatorId = auth.id
         p.memory = true
-        p.id = _.uniqueId('memory-')
+        const newID = _.uniqueId('memory-')
+        itf.properties.forEach(pp => {
+          if (pp.parentId === p.id) pp.parentId = newID
+        })
+        p.id = newID
         delete p.priority
       })
       isPushState = true
-      //   itf.locker = pushState.locker
-      console.log('dddddddddddddddddddddddddddddddddddddd')
-      console.log(pushState)
-      console.log('dddddddddddddddddddddddddddddddddddddd')
     }
     let properties = itf.properties || []
     let ownerlink = repository.organization

@@ -3,10 +3,12 @@ import { PropTypes, Link, replace, push, StoreStateRouterLocationURI } from '../
 import { DialogController } from '../utils'
 import { serve } from '../../relatives/services/constant'
 import InterfaceForm from './InterfaceForm'
+import qs from 'query-string'
 
 class InterfaceSummary extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired,
+    onLockInterface: PropTypes.func.isRequired,
     onDeleteInterface: PropTypes.func.isRequired
   }
   static propTypes = {
@@ -47,9 +49,11 @@ class InterfaceSummary extends Component {
           }
           <li>
             <button type='button' className={`btn btn-secondary btn-success`} onClick={e => {
-              var query = prompt('目标', '问号后头的内容')
+              var query = window.prompt('目标', '问号后头的内容')
               if (query) {
-                this.context.store.dispatch(push(`editor?${query}`, itf))
+                this.context.onLockInterface(qs.parse(query).itf, () => {
+                  this.context.store.dispatch(push(`editor?${query}`, itf))
+                })
               }
             }}>
                 点击复制我
